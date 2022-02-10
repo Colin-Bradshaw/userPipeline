@@ -19,7 +19,7 @@ public class ConnectionUtil {
 	public final String driver = "com.mysql.cj.jdbc.Driver";
 	public String url = "jdbc:mysql://localhost:3306/utopia";
 	public String username = "";
-	public String password = "s";
+	public String password = "";
 
 	@Bean
 	public Connection getConnection() {
