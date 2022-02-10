@@ -23,14 +23,14 @@ public class ConnectionUtil {
 
 	@Bean
 	public Connection getConnection() {
-		if (System.getenv("UTOPIA-DB-UNAME") != null){
-			username = System.getenv("UTOPIA-DB-UNAME");
+		if (System.getenv("UTOPIA_DB_UNAME") != null){
+			username = System.getenv("UTOPIA_DB_UNAME");
 		}
-		if (System.getenv("UTOPIA-DB-PASS") != null){
-			password = System.getenv("UTOPIA-DB-PASS");
+		if (System.getenv("UTOPIA_DB_PASS") != null){
+			password = System.getenv("UTOPIA_DB_PASS");
 		}
-		if (System.getenv("DB-LOC") != null){
-			url = System.getenv("DB-LOC");
+		if (System.getenv("DB_LOC") != null){
+			url = System.getenv("DB_LOC");
 		}
 		try {
 			Class.forName(driver);
