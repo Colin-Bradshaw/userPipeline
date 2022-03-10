@@ -7,30 +7,21 @@ pipeline {
         AWS_CLI = '/usr/local/bin/aws'
     }
     stages {
-        stage('init') {
+        stage('scan') { 
             steps {
-                sh 'rm -r userPipeline'
-                sh 'git clone https://github.com/Colin-Bradshaw/userPipeline.git'
+                withSonarQubeEnv('SonarQubeScanner'){
+                    sh 'mvn verify sonar:sonar -Dsonar.host.url=http://jenkins.hitec.link:9000/ -Dsonar.login=dbe54ee91fab45705e2a7ccbdb2a3ef0587cad48'
+                }
             }
         }
-        stage('build and scan') { 
+        stage('build') { 
             steps {
-                // booking
-                dir ('userPipeline'){
-                    withSonarQubeEnv('SonarQubeScanner'){
-                        sh 'mvn verify sonar:sonar -Dsonar.host.url=http://jenkins.hitec.link:9000/ -Dsonar.login=dbe54ee91fab45705e2a7ccbdb2a3ef0587cad48'
-                    }
-                    sh 'mvn clean install > maven-build.txt'
-                }
+                sh 'mvn clean install > maven-build.txt'
             }
         }
         stage('dockerize') { 
             steps {
-                // booking
-                dir ('userPipeline'){
-                    sh 'docker build -t "jenkins-auto-build-users:latest" .'
-                }
-                
+                sh 'docker build -t "jenkins-auto-build-users:latest" .'
             }
         }
         stage('push to ecr') { 
