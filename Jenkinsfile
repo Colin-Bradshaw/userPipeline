@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('scan') { 
             steps {
-                withSonarQubeEnv('SonarQubeScanner'){
+                withSonarQubeEnv('sonarqube'){
                     sh 'mvn verify sonar:sonar -Dsonar.projectKey=cb-user -Dsonar.host.url=http://jenkins.hitec.link:9000/ -Dsonar.login=3b4c1716c02efa3ef2d3c1e2d483ffbb714c024c'
                 }
             }
