@@ -2,7 +2,7 @@ pipeline {
     agent any 
     environment {
         DB_LOC = credentials("CB_DB_LOC")
-        UTOPIA_DB_UNAME = credentials("CB-DB-USER")
+        UTOPIA_DB_UNAME = credentials("CB_DB_USER")
         UTOPIA_DB_PASS = credentials("CB_DB_PASS")
         AWS_CLI = '/usr/local/bin/aws'
     }
